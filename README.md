@@ -1,55 +1,295 @@
-Overview
-This is a simple and interactive Rock Paper Scissors game built with HTML, CSS, and JavaScript.
-Users can play against the computer by selecting rock, paper, or scissors. The game keeps score and shows results dynamically.
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rock Paper Scissors Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+  <div class="choices">
+    <div class="choice" id="rock" tabindex="0">
+      <img src="rock.png" alt="Rock" />
+    </div>
+    <div class="choice" id="paper" tabindex="0">
+      <img src="paper.png" alt="Paper" />
+    </div>
+    <div class="choice" id="scissors" tabindex="0">
+      <img src="scissors.png" alt="Scissors" />
+    </div>
+  </div>
+  <div class="score-board">
+    <div class="score">
+      <p id="user-score">0</p>
+      <p>You</p>
+    </div>
+    <div class="score">
+      <p id="comp-score">0</p>
+      <p>Comp</p>
+    </div>
+  </div>
+  <div class="msg-container">
+    <p id="msg">Play your move</p>
+  </div>
+</body>
+</html>
+/* Reset and center text */
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
-Features
-Responsive design that works on desktops, tablets, and mobiles
+body {
+  /* Gradient from light beige to soft pink */
+  background: linear-gradient(135deg, #DFD0B8, #F7C1D1);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+}
 
-Click or keyboard accessible (Enter/Space keys) to select choices
 
-Visual feedback on choices with hover effects and animations
+/* Header */
+h1 {
+  background-color: #DA6C6C;
+  color: #222831;
+  height: 5rem;
+  line-height: 5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
 
-Real-time score tracking for user and computer
+/* Choices container */
+.choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 5rem;
+}
 
-Dynamic message display for game status (win, lose, draw)
+/* Each choice */
+.choice {
+  height: 165px;
+  width: 165px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
 
-Stylish gradient backgrounds and smooth UI animations
+.choice:hover {
+  cursor: pointer;
+  background: linear-gradient(45deg, #ed1ce3, #DA6C6C);
+}
 
-How to Use
-Open index.html in any modern web browser.
 
-Click or press Enter/Space on your choice (rock, paper, or scissors).
+/* Images inside choices */
+img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
 
-See the computer’s choice and the game result.
+/* Slight scale on hover for images */
+.choice:hover img {
+  transform: scale(1.1);
+}
 
-Scores update automatically.
+/* Scoreboard container */
+.score-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 3rem;
+  gap: 5rem;
+}
 
-Play as many rounds as you like!
+/* Score numbers */
+#user-score,
+#comp-score {
+  font-size: 4rem;
+}
 
-Project Structure
-index.html — Main HTML file containing the game layout
+/* Message container */
+.msg-container {
+  margin-top: 5rem;
+}
 
-style.css — CSS file with styling and responsive design
+/* Message box */
+#msg {
+  background-color: #081b31;
+  color: #fff;
+  font-size: 2rem;
+  display: inline;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  max-width: 90vw;
+  word-wrap: break-word;
+}
 
-app.js — JavaScript file containing game logic and interactivity
+/* ========== Responsive Styles ========== */
+@media (max-width: 900px) {
+  /* Reduce gaps on medium screens */
+  .choices {
+    gap: 2rem;
+    margin-top: 3rem;
+  }
 
-Images: rock.png, paper.png, scissors.png (placed in the same folder or subfolder)
+  .choice {
+    width: 130px;
+    height: 130px;
+  }
 
-How to Run Locally
-Clone or download the repository
+  img {
+    width: 115px;
+    height: 115px;
+  }
 
-Make sure all files are in the same folder or update image paths accordingly
+  .score-board {
+    gap: 3rem;
+    font-size: 1.5rem;
+  }
 
-Open index.html with your browser to start playing
+  #user-score,
+  #comp-score {
+    font-size: 3rem;
+  }
 
-Known Issues / Future Improvements
-Add sound effects and animations (optional)
+  #msg {
+    font-size: 1.6rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
 
-Add player name input and reset button
+@media (max-width: 600px) {
+  /* Stack choices vertically on small screens */
+  .choices {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
 
-Add multiplayer support or online play
+  .choice {
+    width: 120px;
+    height: 120px;
+  }
 
-Enhance accessibility further
+  img {
+    width: 100px;
+    height: 100px;
+  }
 
-License
-This project is open source and free to use for learning and fun.
+  .score-board {
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  #user-score,
+  #comp-score {
+    font-size: 3rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    height: auto;
+    line-height: 2.5rem;
+    padding: 1rem 0;
+  }
+
+  #msg {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+let userScore = 0;
+let compScore = 0;
+
+const choices = document.querySelectorAll(".choice");
+const msg = document.querySelector("#msg");
+const userScorePara = document.querySelector("#user-score");
+const compScorePara = document.querySelector("#comp-score");
+
+// Animate score number change smoothly
+function animateScore(element, start, end) {
+  let current = start;
+  const stepTime = 30; // ms
+  const increment = end > start ? 1 : -1;
+  if (start === end) return;
+  const timer = setInterval(() => {
+    current += increment;
+    element.innerText = current;
+    if (current === end) clearInterval(timer);
+  }, stepTime);
+}
+
+const genCompChoice = () => {
+  const options = ["rock", "paper", "scissors"];
+  const randIdx = Math.floor(Math.random() * 3);
+  return options[randIdx];
+};
+
+const drawGame = () => {
+  msg.innerText = "😐 It's a Draw! Try again.";
+  msg.style.backgroundColor = "#081b31";
+};
+
+const showWinner = (userWin, userChoice, compChoice) => {
+  if (userWin) {
+    const oldScore = userScore;
+    userScore++;
+    animateScore(userScorePara, oldScore, userScore);
+    msg.innerText = `🎉 You win! ${userChoice} beats ${compChoice}`;
+    msg.style.backgroundColor = "green";
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  } else {
+    const oldScore = compScore;
+    compScore++;
+    animateScore(compScorePara, oldScore, compScore);
+    msg.innerText = `😞 You lost. ${compChoice} beats ${userChoice}`;
+    msg.style.backgroundColor = "red";
+  }
+};
+
+const playGame = (userChoice) => {
+  const compChoice = genCompChoice();
+  if (userChoice === compChoice) {
+    drawGame();
+  } else {
+    let userWin = true;
+    if (userChoice === "rock") {
+      userWin = compChoice === "paper" ? false : true;
+    } else if (userChoice === "paper") {
+      userWin = compChoice === "scissors" ? false : true;
+    } else {
+      userWin = compChoice === "rock" ? false : true;
+    }
+    showWinner(userWin, userChoice, compChoice);
+  }
+};
+
+choices.forEach((choice) => {
+  choice.addEventListener("click", () => {
+    const userChoice = choice.getAttribute("id");
+    choice.classList.add("active");
+    setTimeout(() => choice.classList.remove("active"), 500);
+    playGame(userChoice);
+  });
+
+  // Accessibility: allow keyboard enter/space to select
+  choice.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      choice.click();
+    }
+  });
+});
