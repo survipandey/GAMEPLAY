@@ -52,7 +52,7 @@ body {
 }
 
 
-/* Header */
+
 h1 {
   background-color: #DA6C6C;
   color: #222831;
@@ -71,7 +71,7 @@ h1 {
   margin-top: 5rem;
 }
 
-/* Each choice */
+
 .choice {
   height: 165px;
   width: 165px;
@@ -88,7 +88,7 @@ h1 {
 }
 
 
-/* Images inside choices */
+
 img {
   height: 150px;
   width: 150px;
@@ -97,12 +97,12 @@ img {
   transition: transform 0.3s ease;
 }
 
-/* Slight scale on hover for images */
+
 .choice:hover img {
   transform: scale(1.1);
 }
 
-/* Scoreboard container */
+
 .score-board {
   display: flex;
   justify-content: center;
@@ -135,7 +135,7 @@ img {
   word-wrap: break-word;
 }
 
-/* ========== Responsive Styles ========== */
+
 @media (max-width: 900px) {
   /* Reduce gaps on medium screens */
   .choices {
@@ -170,7 +170,7 @@ img {
 }
 
 @media (max-width: 600px) {
-  /* Stack choices vertically on small screens */
+  
   .choices {
     flex-direction: column;
     gap: 2rem;
@@ -219,7 +219,7 @@ const msg = document.querySelector("#msg");
 const userScorePara = document.querySelector("#user-score");
 const compScorePara = document.querySelector("#comp-score");
 
-// Animate score number change smoothly
+
 function animateScore(element, start, end) {
   let current = start;
   const stepTime = 30; // ms
@@ -285,7 +285,7 @@ choices.forEach((choice) => {
     playGame(userChoice);
   });
 
-  // Accessibility: allow keyboard enter/space to select
+
   choice.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
